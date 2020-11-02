@@ -35,5 +35,5 @@ app.get('/compose', (req, res) => {
 });
 
 app.post('/compose', (req, res) => {
-  console.log(req.body.newEntry)
-})
+  console.log(req.body.postTitle);
+});
