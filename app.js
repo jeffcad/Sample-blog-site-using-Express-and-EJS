@@ -21,7 +21,7 @@ app.listen(port, () => {
 });
 
 app.get('/', (req, res) => {
-  res.render('home', { homeStartingContent });
+  res.render('home', { homeStartingContent, posts });
 });
 
 app.get('/about', (req, res) => {
