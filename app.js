@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const lodash = require('lodash');
 const mongoose = require('mongoose');
 
 const homeStartingContent = 'Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.';
@@ -69,21 +68,13 @@ app.post('/compose', async (req, res) => {
   res.redirect('/');
 });
 
-app.get('/posts/:postName', async (req, res) => {
-  const requestedTitle = lodash.lowerCase(req.params.postName);
-  let posts;
+app.get('/posts/:postId', async (req, res) => {
+  let post;
   try {
-    posts = await Post.find({});
+    post = await Post.findById(req.params.postId);
   } catch (err) {
     console.log(err);
   }
 
-  for (const post of posts) {
-    const postTitleLodash = lodash.lowerCase(post.title);
-
-    if (postTitleLodash === requestedTitle) {
-      res.render('post', { post });
-      break;
-    };
-  };
+  res.render('post', { post });
 });
